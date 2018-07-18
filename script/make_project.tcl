@@ -26,7 +26,7 @@ set proj_dir [get_property directory [current_project]]
 # Set project properties
 set obj [get_projects $project_name]
 set_property "default_lib" "xil_defaultlib" $obj
-set_property "board_part" "xilinx.com:kc705:part0:1.1" $obj
+set_property "part" "xc7a100tcsg324-1" $obj
 set_property "simulator_language" "Mixed" $obj
 
 # Create 'sources_1' fileset (if not found)
@@ -81,7 +81,7 @@ set_property include_dirs [list \
                                [file normalize $origin_dir/generated-src] \
                               ] [get_filesets sources_1]
 
-set_property verilog_define [list FPGA FPGA_FULL KC705] [get_filesets sources_1]
+set_property verilog_define [list FPGA FPGA_FULL ARTYA7] [get_filesets sources_1]
 
 # Set 'sources_1' fileset properties
 set_property "top" "chip_top" [get_filesets sources_1]
@@ -120,26 +120,19 @@ generate_target {instantiation_template} [get_files $proj_dir/$project_name.srcs
 # Clock generators
 create_ip -name clk_wiz -vendor xilinx.com -library ip -module_name clk_wiz_0
 set_property -dict [list \
-                        CONFIG.CLK_IN1_BOARD_INTERFACE {sys_diff_clock} \
-                        CONFIG.CLK_IN2_BOARD_INTERFACE {Custom} \
-                        CONFIG.RESET_BOARD_INTERFACE {reset} \
+                        CONFIG.RESET_BOARD_INTERFACE {Custom} \
                         CONFIG.RESET_TYPE {ACTIVE_HIGH} \
-                        CONFIG.PRIM_SOURCE {Differential_clock_capable_pin} \
+                        CONFIG.PRIM_SOURCE {Single_ended_clock_capable_pin} \
                         CONFIG.PRIM_IN_FREQ {100.000} \
                         CONFIG.CLKIN1_JITTER_PS {50.0} \
                         CONFIG.MMCM_DIVCLK_DIVIDE {1} \
-                        CONFIG.MMCM_CLKFBOUT_MULT_F {6} \
-                        CONFIG.MMCM_CLKIN1_PERIOD {5.000} \
-                        CONFIG.MMCM_CLKIN2_PERIOD {10.0} \
                         CONFIG.RESET_PORT {reset} \
                         CONFIG.PRIMITIVE {PLL} \
                         CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {200.000} \
                         CONFIG.RESET_TYPE {ACTIVE_LOW} \
                         CONFIG.CLKOUT1_DRIVES {BUFG} \
                         CONFIG.MMCM_DIVCLK_DIVIDE {1} \
-                        CONFIG.MMCM_CLKFBOUT_MULT_F {10} \
                         CONFIG.MMCM_COMPENSATION {ZHOLD} \
-                        CONFIG.MMCM_CLKOUT0_DIVIDE_F {5} \
                         CONFIG.RESET_PORT {resetn} \
                         CONFIG.CLKOUT1_JITTER {114.829} \
                         CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
@@ -233,7 +226,7 @@ set_property include_dirs [list \
                                [file normalize $origin_dir/generated-src] \
                                [file normalize $proj_dir/$project_name.srcs/sources_1/ip/mig_7series_0/mig_7series_0/example_design/sim] \
                               ] $obj
-#set_property verilog_define [list FPGA FPGA_FULL NEXYS4] $obj
+#set_property verilog_define [list FPGA FPGA_FULL ARTYA7] $obj
 set_property verilog_define [list FPGA] $obj
 
 set_property -name {xsim.elaborate.xelab.more_options} -value {-cc gcc -sv_lib dpi} -objects $obj
