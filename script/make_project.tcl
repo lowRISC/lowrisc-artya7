@@ -39,7 +39,7 @@ set files [list \
                [file normalize $base_dir/rocket-chip/vsim/generated-src/freechips.rocketchip.system.$CONFIG.v] \
                [file normalize $base_dir/src/main/verilog/chip_top.sv] \
                [file normalize $base_dir/src/main/verilog/periph_soc.sv] \
-               [file normalize $base_dir/src/main/verilog/framing_top.sv] \
+               [file normalize $base_dir/src/main/verilog/framing_top_mii.sv] \
                [file normalize $base_dir/src/main/verilog/axis_gmii_rx.v] \
                [file normalize $base_dir/src/main/verilog/axis_gmii_tx.v] \
                [file normalize $base_dir/src/main/verilog/lfsr.v] \
@@ -137,22 +137,22 @@ set_property -dict [list \
                         CONFIG.CLKOUT1_JITTER {114.829} \
                         CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
                         CONFIG.CLKOUT2_DRIVES {BUFG} \
-                        CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {60.000} \
+                        CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {50.000} \
                         CONFIG.CLKOUT2_USED {1} \
-                        CONFIG.CLK_OUT2_PORT {clk_io_uart} \
+                        CONFIG.CLK_OUT2_PORT {clk_cpu} \
                         CONFIG.CLKOUT3_DRIVES {BUFG} \
                         CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {120.000} \
                         CONFIG.CLKOUT3_USED {1} \
                         CONFIG.CLK_OUT3_PORT {clk_pixel} \
                         CONFIG.CLKOUT4_USED {1} \
                         CONFIG.CLKOUT4_DRIVES {BUFG} \
-                        CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {50.000} \
-                        CONFIG.CLK_OUT4_PORT {clk_rmii} \
+                        CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {25.000} \
+                        CONFIG.CLK_OUT4_PORT {clk_mii} \
                         CONFIG.CLKOUT5_USED {1} \
                         CONFIG.CLKOUT5_DRIVES {BUFG} \
-                        CONFIG.CLKOUT5_REQUESTED_OUT_FREQ {50.000} \
+                        CONFIG.CLKOUT5_REQUESTED_OUT_FREQ {25.000} \
                         CONFIG.CLKOUT5_REQUESTED_PHASE {90.000} \
-                        CONFIG.CLK_OUT5_PORT {clk_rmii_quad}] \
+                        CONFIG.CLK_OUT5_PORT {clk_mii_quad}] \
     [get_ips clk_wiz_0]
 generate_target {instantiation_template} [get_files $proj_dir/$project_name.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci]
 #SD-card clock generator
