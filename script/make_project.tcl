@@ -112,7 +112,7 @@ set_property -dict [list \
                         CONFIG.ADDR_WIDTH {30} \
                         CONFIG.DATA_WIDTH $mem_data_width \
                         CONFIG.ID_WIDTH $axi_id_width \
-                        CONFIG.ACLK_ASYNC {0} \
+                        CONFIG.ACLK_ASYNC {1} \
                         CONFIG.ACLK_RATIO {1:2}] \
     [get_ips axi_clock_converter_0]
 generate_target {instantiation_template} [get_files $proj_dir/$project_name.srcs/sources_1/ip/axi_clock_converter_0/axi_clock_converter_0.xci]
@@ -124,26 +124,25 @@ set_property -dict [list \
                         CONFIG.RESET_TYPE {ACTIVE_HIGH} \
                         CONFIG.PRIM_SOURCE {Single_ended_clock_capable_pin} \
                         CONFIG.PRIM_IN_FREQ {100.000} \
-                        CONFIG.CLKIN1_JITTER_PS {50.0} \
                         CONFIG.MMCM_DIVCLK_DIVIDE {1} \
                         CONFIG.RESET_PORT {reset} \
                         CONFIG.PRIMITIVE {PLL} \
+                        CONFIG.CLK_OUT1_PORT {clk_ref} \
                         CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {200.000} \
                         CONFIG.RESET_TYPE {ACTIVE_LOW} \
                         CONFIG.CLKOUT1_DRIVES {BUFG} \
                         CONFIG.MMCM_DIVCLK_DIVIDE {1} \
                         CONFIG.MMCM_COMPENSATION {ZHOLD} \
                         CONFIG.RESET_PORT {resetn} \
-                        CONFIG.CLKOUT1_JITTER {114.829} \
-                        CONFIG.CLKOUT1_PHASE_ERROR {98.575} \
+                        CONFIG.USE_RESET {1} \
                         CONFIG.CLKOUT2_DRIVES {BUFG} \
                         CONFIG.CLKOUT2_REQUESTED_OUT_FREQ {50.000} \
                         CONFIG.CLKOUT2_USED {1} \
                         CONFIG.CLK_OUT2_PORT {clk_cpu} \
                         CONFIG.CLKOUT3_DRIVES {BUFG} \
-                        CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {120.000} \
+                        CONFIG.CLKOUT3_REQUESTED_OUT_FREQ {166.667} \
                         CONFIG.CLKOUT3_USED {1} \
-                        CONFIG.CLK_OUT3_PORT {clk_pixel} \
+                        CONFIG.CLK_OUT3_PORT {clk_sys} \
                         CONFIG.CLKOUT4_USED {1} \
                         CONFIG.CLKOUT4_DRIVES {BUFG} \
                         CONFIG.CLKOUT4_REQUESTED_OUT_FREQ {25.000} \
